@@ -2,9 +2,9 @@
 
 DATE=$(date +"%Y-%m-%d_%H%M")
 LOG="/var/log/picam/picam.log"
-HOMEDIR=$( getent passwd "$USER" | cut -d: -f6 )
-REPERTOIRESTOCKAGE=$HOMEDIR/capture/
-NBPHOTO=5
+SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+REPERTOIRESTOCKAGE=SCRIPT_DIR
+NBPHOTO=4
 
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Début prise de vue" >> $LOG
 
@@ -14,6 +14,7 @@ do
 	DATEPHOTO=$(date +"%Y-%m-%d_%H%M%S")
 
 	# Prend une photo, envoie drive et supprime en local
+	echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Prise de vue $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg" >> $LOG
 	rpicam-still -o $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx219_noir.json --width 3280 --height 2464
 	rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg drive:Catcam/Pi2
 	rm $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg

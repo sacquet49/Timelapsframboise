@@ -32,8 +32,8 @@ $ sudo crontab -e
 
 Pour la cameraIr
 ````
- * * * * * -u user /home/picam/camera_ir.sh 2>&1
- 0 * 22-8 * * -u user /home/picam/camera_ir.sh 2>&1
+ * * * * * -u user /etc/picam/camera_ir.sh 2>&1
+ 0 * 22-8 * * -u user /etc/picam/camera_ir.sh 2>&1
 ````
 
 Pour la camera classic 
