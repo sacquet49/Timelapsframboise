@@ -3,7 +3,7 @@
 DATE=$(date +"%Y-%m-%d_%H%M")
 LOG="/var/log/picam/picam.log"
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-REPERTOIRESTOCKAGE=SCRIPT_DIR
+REPERTOIRESTOCKAGE=$SCRIPT_DIR
 NBPHOTO=4
 
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Début prise de vue" >> $LOG
