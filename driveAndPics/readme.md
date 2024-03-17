@@ -27,7 +27,7 @@ sudo chmod +x /etc/picam/camera.sh
 
 Commande pour mettre à jour le Cron tab
 ````
-$ sudo sudo crontab -e
+$ sudo crontab -e
 ````
 
 Pour la cameraIr
