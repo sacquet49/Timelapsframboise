@@ -1,10 +1,10 @@
 #!/bin/bash
 
 DATE=$(date +"%Y-%m-%d_%H%M")
-LOG="/var/log/picam.log"
+LOG="/var/log/picam/picam.log"
 HOMEDIR=$( getent passwd "$USER" | cut -d: -f6 )
 REPERTOIRESTOCKAGE=$HOMEDIR/capture/
-NBPHOTO=6
+NBPHOTO=5
 
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Début prise de vue" >> $LOG
 
@@ -13,12 +13,13 @@ for numero in `seq 1 $NBPHOTO`
 do
 	DATEPHOTO=$(date +"%Y-%m-%d_%H%M%S")
 
-	# Prend une photo
+	# Prend une photo, envoie drive et supprime en local
 	rpicam-still -o $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx219_noir.json --width 3280 --height 2464
-	# rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg drive:Catcam/Pi2
+	rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg drive:Catcam/Pi2
+	rm $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg
 
 	# Temps de pause entre chaque image
-	sleep 4
+	sleep 1
 done
 
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Fin prise de vue" >> $LOG

@@ -13,6 +13,16 @@ $ rclone copy image_infrarouge-test.jpg drive:Catcam/
 $ rclone copy image-test.jpg drive:Catcam/
 ````
 
+# Depose des shell et attribution des bon droits 
+
+````
+sudo mkdir /etc/picam
+sudo mkdir /var/log/picam
+sudo chown user:user /var/log/picam
+sudo chown user:user /etc/picam
+sudo chmod +x /etc/picam/camera.sh
+````
+
 # Cron table 
 
 Commande pour mettre à jour le Cron tab
@@ -22,12 +32,12 @@ $ sudo sudo crontab -e
 
 Pour la cameraIr
 ````
- * * * * * /home/picam/camera_ir.sh 2>&1
- 0 * 22-8 * * /home/picam/camera_ir.sh 2>&1
+ * * * * * -u user /home/picam/camera_ir.sh 2>&1
+ 0 * 22-8 * * -u user /home/picam/camera_ir.sh 2>&1
 ````
 
 Pour la camera classic 
 ````
- * * * * * /etc/picam/camera.sh 2>&1
- 0 * 8-22 * * /etc/picam/camera.sh 2>&1
+ * * * * * -u user /etc/picam/camera.sh 2>&1
+ 0 * 8-22 * * -u user /etc/picam/camera.sh 2>&1
 ````
