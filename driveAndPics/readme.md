@@ -33,11 +33,16 @@ $ sudo crontab -e
 Pour la cameraIr
 ````
  * * * * * /etc/picam/camera_ir.sh 2>&1
- * 22-8 * * * /etc/picam/camera_ir.sh 2>&1
+ * 22-23,0-8 * * * /etc/picam/camera_ir.sh 2>&1
 ````
 
 Pour la camera classic 
 ````
  * * * * * /etc/picam/camera.sh 2>&1
  * 8-22 * * * /etc/picam/camera.sh 2>&1
+````
+
+Pour la cleanDrive
+````
+ 0 23 * * * /etc/picam/driveClean.sh 2>&1
 ````
