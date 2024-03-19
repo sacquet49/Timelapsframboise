@@ -4,7 +4,7 @@ DATE=$(date +"%Y-%m-%d_%H%M")
 LOG="/var/log/picam/picam.log"
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 REPERTOIRESTOCKAGE=$SCRIPT_DIR
-NBPHOTO=6
+NBPHOTO=1
 
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Début prise de vue" >> $LOG
 	
@@ -18,9 +18,6 @@ do
 	rpicam-still -q 90 -o $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg --exposure long
 	rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg drive:Catcam/Pi3
 	rm $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg
-
-	# Temps de pause entre chaque image
-	sleep 1
 done
 
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Fin prise de vue" >> $LOG
