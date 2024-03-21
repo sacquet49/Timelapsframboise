@@ -11,7 +11,7 @@ DATEPHOTO=$(date +"%Y-%m-%d_%H%M%S")
 # Prend une video, envoie drive et supprime en local
 echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Prise de vue $REPERTOIRESTOCKAGE/$DATEPHOTO.mkv" >> $LOG
 
-rpicam-vid -t 100000 -o $REPERTOIRESTOCKAGE/$DATEPHOTO.h264 --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx219_noir.json --save-pts  $REPERTOIRESTOCKAGE/$DATEPHOTO.txt
+rpicam-vid -t 100000 -o $REPERTOIRESTOCKAGE/$DATEPHOTO.h264 --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx219_noir.json --save-pts  $REPERTOIRESTOCKAGE/$DATEPHOTO.txt --nopreview
 mkvmerge -o $REPERTOIRESTOCKAGE/$DATEPHOTO.mkv --timecodes 0:$REPERTOIRESTOCKAGE/$DATEPHOTO.txt $REPERTOIRESTOCKAGE/$DATEPHOTO.h264
 
 rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.mkv drive:Catcam/Pi2
