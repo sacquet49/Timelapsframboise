@@ -15,7 +15,7 @@ do
 
 	# Prend une photo, envoie drive et supprime en local
 	echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Prise de vue $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg" >> $LOG
-	rpicam-still -q 90 -o $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg --exposure long --nopreview
+	rpicam-still -q 90 -o $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg --exposure long --nopreview --width 3280 --height 2464
 	rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg drive:Catcam/Pi3
 	rm $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg
 done
