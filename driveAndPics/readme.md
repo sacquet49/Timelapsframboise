@@ -35,12 +35,14 @@ Pour la cameraIr
  * * * * * /etc/picam/camera_ir.sh 2>&1
  * 22-23,0-8 * * * /etc/picam/camera_ir.sh 2>&1
  */10 8-17 * * * /etc/picam/vid_ir.sh 2>&1
+ */2 8-17 * * MON-FRI /etc/picam/vid.sh 2>&1
 ````
 
 Pour la camera classic 
 ````
  * * * * * /etc/picam/camera.sh 2>&1
  * 8-22 * * * /etc/picam/camera.sh 2>&1
+ */2 8-17 * * MON-FRI /etc/picam/camera.sh 2>&1
 ````
 
 Pour la cleanDrive
