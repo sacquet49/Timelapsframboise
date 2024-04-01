@@ -4,7 +4,7 @@ DATE=$(date +"%Y-%m-%d_%H%M")
 LOG="/var/log/picam/timelaps.log"
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 REPERTOIRESTOCKAGE=$SCRIPT_DIR
-NBPHOTO=5
+NBPHOTO=10
 
 # Prend un nombre de prise de vue défini en parametrage
 for numero in `seq 1 $NBPHOTO`
@@ -17,13 +17,13 @@ echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Début prise de vue" >> $LOG
   # Prend une photo, envoie drive et supprime en local
   echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Prise de vue $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg" >> $LOG
 
-  rpicam-still -q 90 -t 7050000 -o $REPERTOIRESTOCKAGE/$DATEPHOTO%d.jpg --timelapse 2000 --width 3280 --height 2464 --nopreview
+  rpicam-still -q 90 -t 3480000 -o $REPERTOIRESTOCKAGE/$DATEPHOTO%d.jpg --timelapse 2000 --width 3280 --height 2464 --nopreview
 
   ffmpeg -r 30 -f image2 -pattern_type glob -i '*.jpg' -s 1920x1080 -vcodec libx264 $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4
-  # rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4 drive:Catcam/Pi3
+  rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4 drive:Catcam/Pi3
 
   rm $REPERTOIRESTOCKAGE/*.jpg
-  # rm $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4
+  rm $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4
 
   echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Fin prise de vue" >> $LOG
 
