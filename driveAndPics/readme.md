@@ -43,6 +43,8 @@ Pour la camera classic
  * * * * * /etc/picam/camera.sh 2>&1
  * 8-22 * * * /etc/picam/camera.sh 2>&1
  */2 8-17 * * MON-FRI /etc/picam/camera.sh 2>&1
+ # Lancement toutes les deux heures de 8h à 18h.
+ 0 8-17/2 * * * /etc/picam/timelaps.sh 2>&1
 ````
 
 Pour la cleanDrive
