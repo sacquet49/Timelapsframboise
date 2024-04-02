@@ -17,7 +17,7 @@ echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Début prise de vue" >> $LOG
   # Prend une photo, envoie drive et supprime en local
   echo $(date +"%Y-%m-%d_%H:%M:%S")" : INFO : Prise de vue $REPERTOIRESTOCKAGE/$DATEPHOTO.jpg" >> $LOG
 
-  rpicam-still -q 90 -t 3480000 -o $REPERTOIRESTOCKAGE/$DATEPHOTO_%d.jpg --timelapse 2000 --width 3280 --height 2464 --nopreview
+  rpicam-still -q 90 -t 3480000 --datetime --timelapse 2000 --width 3280 --height 2464 --nopreview
 
   ffmpeg -r 30 -f image2 -pattern_type glob -i '*.jpg' -s 1920x1080 -vcodec libx264 $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4
   rclone copy $REPERTOIRESTOCKAGE/$DATEPHOTO.mp4 drive:Catcam/Pi3
